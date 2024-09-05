@@ -1,8 +1,8 @@
-public class demo {
+public class helloWorld {
 
-    public static void main(String args[]) {
-        int x =2;
-        x=x*x;
-        System.out.println(x);
+    public void main(String args[]) {
+        System.out.print( "Hello World!" );
+    
+
     }
 }

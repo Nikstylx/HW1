@@ -1,7 +1,6 @@
 package clientapi;
 
-public interface SourceResponse {
-	
+public interface SourceResponse {	
 }
 
 

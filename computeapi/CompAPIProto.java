@@ -1,6 +1,6 @@
 package computeapi;
 
-public class ComptAPIProto {
+public class CompAPIProto {
     public void prototype(CompAPI comp) {
         InitializingResponse readResponse = computeapi.getInitializing(new InitializingRequest());
         ComputeResponse readResponse = computeapi.getCompute(new ComputeRequest());

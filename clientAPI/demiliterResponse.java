@@ -1,5 +1,4 @@
 package clientapi;
 
-public interface DelimiterResponse {
-	
+public interface DelimiterResponse {	
 }

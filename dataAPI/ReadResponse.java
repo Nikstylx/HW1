@@ -1,4 +1,4 @@
-package dataAPI;
+package dataapi;
 
 public interface ReadResponse {
 	

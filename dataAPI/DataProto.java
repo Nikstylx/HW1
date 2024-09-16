@@ -1,4 +1,4 @@
-package dataAPI;
+package dataapi;
 
 public class DataProto {
     public void prototype(Data data) {

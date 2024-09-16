@@ -3,12 +3,12 @@ package clientapi;
 public class ClientAPIProto {
     public void prototype(ClientAPI client) {
     
-    	DelimiterResponse DelimiterResponse = client.getDelimiter(new DelimiterRequest());
+    	DelimiterResponse delimiterResponse = client.getDelimiter(new DelimiterRequest());
 
     
-        DestinationResponse DestinationResponse = client.setDestination(new DestinationRequest());
+        DestinationResponse destinationResponse = client.setDestination(new DestinationRequest());
 
-        SourceResponse SourceResponse = client.getSource(new SourceRequest());
+        SourceResponse sourceResponse = client.getSource(new SourceRequest());
 
 
     }

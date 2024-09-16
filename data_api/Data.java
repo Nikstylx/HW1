@@ -1,4 +1,4 @@
-package dataAPI;
+package data_api;
 
 public interface Data {
     ReadRepsonse readData(ReadRequest request);

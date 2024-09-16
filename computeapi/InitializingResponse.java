@@ -1,5 +1,5 @@
 package computeapi;
 
-public class InitializingResponse {
+public interface InitializingResponse {
 
 }

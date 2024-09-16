@@ -1,5 +1,5 @@
 package computeapi;
 
-public class WriteRespose {
+public interface WriteRespose {
 
 }

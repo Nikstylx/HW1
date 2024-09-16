@@ -1,5 +1,5 @@
 package computeapi;
 
-public class ReadResponse {
+public interface ReadResponse {
 
 }

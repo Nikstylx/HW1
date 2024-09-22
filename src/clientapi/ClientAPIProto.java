@@ -6,9 +6,10 @@ public class ClientAPIProto {
     	DelimiterResponse delimiterResponse = client.getDelimiter(new DelimiterRequest());
 
     
-        DestinationResponse destinationResponse = client.setDestination(new DestinationRequest());
+        DestinationResponse destinationResponse = client.getDestination(new DestinationRequest());
 
         SourceResponse sourceResponse = client.getSource(new SourceRequest());
+        InitializingResponse readResponse = client.getInitializing(new InitializingRequest());
 
 
     }

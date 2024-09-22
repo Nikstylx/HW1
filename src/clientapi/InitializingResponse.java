@@ -1,4 +1,4 @@
-package computeapi;
+package clientapi;
 
 public interface InitializingResponse {
 

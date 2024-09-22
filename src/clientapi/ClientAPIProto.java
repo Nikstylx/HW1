@@ -9,7 +9,7 @@ public class ClientAPIProto {
         DestinationResponse destinationResponse = client.setDestination(new DestinationRequest());
 
         SourceResponse sourceResponse = client.getSource(new SourceRequest());
-        InitializingResponse readResponse = computeapi.getInitializing(new InitializingRequest());
+        InitializingResponse readResponse = client.getInitializing(new InitializingRequest());
 
 
     }

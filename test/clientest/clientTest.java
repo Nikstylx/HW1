@@ -9,7 +9,7 @@ public class clientTest {
 	
 	@beforeEach
 	void setUp() {
-		mockdata
+		mockdata;
 	}
 
 }

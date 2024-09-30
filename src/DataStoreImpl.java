@@ -2,7 +2,7 @@ package src;
 
 import java.util.Collections;
 
-import edu.softwareeng.sample.WriteResult.WriteResultStatus;
+import src.WriteResult.WriteResultStatus;
 
 public class DataStoreImpl implements DataStore {
 

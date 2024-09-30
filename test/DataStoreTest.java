@@ -1,10 +1,10 @@
-package test;
+package src;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import test.WriteResult.WriteResultStatus;
+import src.WriteResult.WriteResultStatus;
 
 /*
  * In this case, I've split out the smoke tests into two tests, one per method. It's also fine to consolidate

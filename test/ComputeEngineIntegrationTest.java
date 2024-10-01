@@ -1,4 +1,4 @@
-package test;
+package src;
 
 import static org.mockito.Mockito.when;
 

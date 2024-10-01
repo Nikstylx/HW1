@@ -10,9 +10,9 @@ public class DataStoreImpl implements DataStore {
     @Override
     public Iterable<Integer> read(InputConfig input) {
         List<Integer> numbers = new ArrayList<>();
-        // Assuming input is an instance of FileInputConfig
-        if (input instanceof FileInputConfig) {
-            String filePath = ((FileInputConfig) input).getFilePath();
+        // Assuming input is an instance of InputConfig
+        if (input instanceof InputConfig) {
+            String filePath = ((InputConfig) input).getFilePath();
             try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -29,9 +29,9 @@ public class DataStoreImpl implements DataStore {
 
     @Override
     public WriteResult appendSingleResult(OutputConfig output, String result) {
-        // Assuming output is an instance of FileOutputConfig
-        if (output instanceof FileOutputConfig) {
-            String filePath = ((FileOutputConfig) output).getFilePath();
+        // Assuming output is an instance of OutputConfig
+        if (output instanceof OutputConfig) {
+            String filePath = ((OutputConfig) output).getFilePath();
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
                 writer.write(result);
                 writer.newLine();

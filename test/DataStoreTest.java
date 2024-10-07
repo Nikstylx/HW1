@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import edu.softwareeng.sample.WriteResult.WriteResultStatus;
+import src.WriteResult.WriteResultStatus;
 
 /*
  * In this case, I've split out the smoke tests into two tests, one per method. It's also fine to consolidate

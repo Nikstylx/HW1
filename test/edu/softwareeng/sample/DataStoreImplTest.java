@@ -1,7 +1,7 @@
 package edu.softwareeng.sample;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package edu.softwareeng.sample;
+package src;
 
 /**
  * Supports a text file input of numbers, one number per line.

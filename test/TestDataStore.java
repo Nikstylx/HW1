@@ -1,4 +1,4 @@
-package edu.softwareeng.sample;
+package test;
 
 /** 
  * Test-only implementation of DataStore that handles in-memory inputs and outputs

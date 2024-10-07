@@ -1,4 +1,4 @@
-package edu.softwareeng.sample;
+package src;
 
 public class ComputationCoordinatorPrototype {
 

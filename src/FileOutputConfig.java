@@ -1,4 +1,4 @@
-package edu.softwareeng.sample;
+package src;
 
 /**
  * Writes out computation results, separated by a specified delimiter

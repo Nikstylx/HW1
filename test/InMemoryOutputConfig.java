@@ -1,4 +1,4 @@
-package edu.softwareeng.sample;
+package test;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -68,22 +68,7 @@ public class DataStoreImpl implements DataStore {
 				 * we would at worst leak a read-lock file handle, which is NBD and certainly not worth architecting a larger solution around (honestly,
 				 * finalize() might even be overkill in this situation).
 				 */
-				@Override
-				public void finalize() {
-					if (!closed) {
-						try {
-							buff.close();
-							closed = true;
-						} catch (IOException e) {
-							throw new RuntimeException(e);
-						}
-					}
-				}
-			};
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+				
 
 	@Override
 	public WriteResult appendSingleResult(OutputConfig output, String result, char delimiter) {

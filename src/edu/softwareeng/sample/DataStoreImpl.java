@@ -10,7 +10,7 @@ import java.util.Iterator;
 import edu.softwareeng.sample.WriteResult.WriteResultStatus;
 
 public class DataStoreImpl implements DataStore {
-    
+
     @Override
     public Iterable<Integer> read(InputConfig input) {
         // Validate input parameter
@@ -41,18 +41,21 @@ public class DataStoreImpl implements DataStore {
 
                 @Override
                 public Integer next() {
-                    int result = Integer.parseInt(line);
                     try {
+                        // Ensure line is read before parsing
+                        if (line == null) {
+                            throw new IllegalStateException("No more elements to read");
+                        }
+                        int result = Integer.parseInt(line);
                         line = buff.readLine();
                         if (!hasNext()) {
                             buff.close();
                             closed = true;
                         }
+                        return result;
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        throw new RuntimeException("Error reading from file: " + e.getMessage(), e);
                     }
-
-                    return result;
                 }
 
                 @Override
@@ -67,13 +70,13 @@ public class DataStoreImpl implements DataStore {
                             buff.close();
                             closed = true;
                         } catch (IOException e) {
-                            throw new RuntimeException(e);
+                            throw new RuntimeException("Error closing BufferedReader: " + e.getMessage(), e);
                         }
                     }
                 }
             };
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error creating file iterator: " + e.getMessage(), e);
         }
     }
 
@@ -86,9 +89,6 @@ public class DataStoreImpl implements DataStore {
         if (result == null) {
             throw new IllegalArgumentException("Result cannot be null");
         }
-
-        // No validation needed for delimiter as it is a char type
-        // (Any char can be used as a delimiter)
 
         OutputConfig.visitOutputConfig(output, config -> {
             // Validate the file name
@@ -104,7 +104,7 @@ public class DataStoreImpl implements DataStore {
         try (FileWriter writer = new FileWriter(new File(fileName), true)) {
             writer.append(line);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error writing to file: " + e.getMessage(), e);
         }
     }
 

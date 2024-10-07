@@ -34,4 +34,18 @@ public class CoordinatorImpl implements ComputationCoordinator {
         }
 
         // No validation needed for delimiter as it is a char type
-  
+        // (Any char can be used as a delimiter)
+
+        try {
+            Iterable<Integer> integers = ds.read(request.getInputConfig());
+            for (int val : integers) {
+                ds.appendSingleResult(request.getOutputConfig(), ce.compute(val), request.getDelimiter());
+            }
+            return ComputeResult.SUCCESS;
+        } catch (Exception e) {
+            // Log the exception (use a logging framework in production code)
+            System.err.println("Error during computation: " + e.getMessage());
+            throw new RuntimeException("Computation error: " + e.getMessage(), e);
+        }
+    }
+}

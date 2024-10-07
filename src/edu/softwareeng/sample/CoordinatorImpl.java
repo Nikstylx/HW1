@@ -1,4 +1,4 @@
-package src;
+package edu.softwareeng.sample;
 
 public class CoordinatorImpl implements ComputationCoordinator {
 	
@@ -12,7 +12,11 @@ public class CoordinatorImpl implements ComputationCoordinator {
 
 	@Override
 	public ComputeResult compute(ComputeRequest request) {
-		return ComputeResult.FAILURE;
+		Iterable<Integer> integers = ds.read(request.getInputConfig());
+		for (int val : integers) {
+			ds.appendSingleResult(request.getOutputConfig(), ce.compute(val), request.getDelimiter());
+		}
+		return ComputeResult.SUCCESS;
 	}
 
 }

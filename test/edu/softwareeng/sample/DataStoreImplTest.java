@@ -1,15 +1,10 @@
 package edu.softwareeng.sample;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
+
 import java.io.File;
 import java.io.IOException;
-
-import org.junit.jupiter.api.Test;
-
-import src.edu.softwareeng.sample.DataStoreImpl;
-import src.edu.softwareeng.sample.FileInputConfig;
-import src.edu.softwareeng.sample.FileOutputConfig;
-import src.edu.softwareeng.sample.InputConfig;
-import src.edu.softwareeng.sample.OutputConfig;
 
 public class DataStoreImplTest {
 

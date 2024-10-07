@@ -63,17 +63,7 @@ public class DataStoreImpl implements DataStore {
                     return line != null;
                 }
 
-                @Override
-                public void finalize() {
-                    if (!closed) {
-                        try {
-                            buff.close();
-                            closed = true;
-                        } catch (IOException e) {
-                            throw new RuntimeException("Error closing BufferedReader: " + e.getMessage(), e);
-                        }
-                    }
-                }
+                
             };
         } catch (IOException e) {
             throw new RuntimeException("Error creating file iterator: " + e.getMessage(), e);

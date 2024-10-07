@@ -1,4 +1,4 @@
-package src;
+package edu.softwareeng.sample;
 
 /**
  * API 2: Process-level API between the compute engine and the layer that knows how to read/write 
@@ -20,5 +20,5 @@ package src;
  */
 public interface DataStore {
 	Iterable<Integer> read(InputConfig input);
-	WriteResult appendSingleResult(OutputConfig output, String result);
+	WriteResult appendSingleResult(OutputConfig output, String result, char delimiter);
 }

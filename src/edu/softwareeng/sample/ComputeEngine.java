@@ -1,4 +1,4 @@
-package src;
+package edu.softwareeng.sample;
 /**
  * API 3: Conceptual API within the compute engine process
  * 

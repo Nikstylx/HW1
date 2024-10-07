@@ -1,4 +1,4 @@
-package src;
+package edu.softwareeng.sample;
 
 public class DataStorePrototype {
 
@@ -36,7 +36,7 @@ public class DataStorePrototype {
 			// we know we're going to write results of "something" to the output. Here, there's a pretty significant design decision that the output
 			// will be represented as a String - this is saying that the logic for how to format the results will have to live *somewhere else*, and 
 			// not in the DataStore. Other decisions about this are also valid!
-			WriteResult writeResult = apiToCall.appendSingleResult(outputConfig, result);
+			WriteResult writeResult = apiToCall.appendSingleResult(outputConfig, result, ',');
 			
 			// For variety of solutions (not actually recommended within a project, consistency is valuable), this is an example of a slightly simpler
 			// enum return value. Notice how the prototype code here is more complex than the result status checking in the ComputationCoordinatorPrototype!

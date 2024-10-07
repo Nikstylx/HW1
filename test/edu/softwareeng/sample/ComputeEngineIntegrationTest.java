@@ -1,4 +1,4 @@
-package src;
+package edu.softwareeng.sample;
 
 import static org.mockito.Mockito.when;
 
@@ -8,8 +8,6 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import src.ComputeRequest;
 
 public class ComputeEngineIntegrationTest {
 

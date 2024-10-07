@@ -1,4 +1,4 @@
-package src;
+package edu.softwareeng.sample;
 
 public interface ComputeResult {
 	static ComputeResult SUCCESS = () -> ComputeResultStatus.SUCCESS;

@@ -1,4 +1,4 @@
-package edu.softwareeng.sample;
+package test;
 
 import static org.mockito.Mockito.when;
 

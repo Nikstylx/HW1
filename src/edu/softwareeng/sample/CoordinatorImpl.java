@@ -2,6 +2,8 @@ package edu.softwareeng.sample;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.Future;
 
 public class CoordinatorImpl implements ComputationCoordinator {

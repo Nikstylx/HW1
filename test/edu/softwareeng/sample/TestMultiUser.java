@@ -24,6 +24,9 @@ public class TestMultiUser {
 		//TODO 2: create an instance of your coordinator component; this is the component
 		// that the user will make requests to
 		// Store it in the 'coordinator' instance variable
+		DataStore dataStore = new DataStore();
+		ComputeEngine computeEngine = new ComputeEngine();
+		
 		coordinator = new CoordinatorImpl(dataStore, computeEngine);
 	}
 

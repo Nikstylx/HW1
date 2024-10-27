@@ -2,6 +2,7 @@ package edu.softwareeng.sample;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class CoordinatorImpl implements ComputationCoordinator {
     
@@ -47,7 +48,8 @@ public class CoordinatorImpl implements ComputationCoordinator {
             futures.add(executor.submit(() -> {
                 ds.appendSingleResult(request.getOutputConfig(), ce.compute(val), request.getDelimiter());
                 return null; // Return null as the method requires a return type
-            }));
+            }
+                                       ));
         }
 
         // Wait for all tasks to complete

@@ -39,7 +39,7 @@ public class CoordinatorImpl implements ComputationCoordinator {
     }
         
 
-    
+    ExecutorService executor = Executors.newFixedThreadPool(8);
     List<Future<Void>> futures = new ArrayList<>();
 
     try {

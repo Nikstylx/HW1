@@ -25,8 +25,7 @@ public class CoordinatorImpl implements ComputationCoordinator {
     @Override
     public ComputeResult compute(ComputeRequest request) {
     // Validate request parameter
-    ExecutorService executor = Executors.newFixedThreadPool(8);
-    List<Future<Void>> futures = new ArrayList<>();
+    
     if (request == null) {
         throw new IllegalArgumentException("ComputeRequest cannot be null");
     }
@@ -38,7 +37,10 @@ public class CoordinatorImpl implements ComputationCoordinator {
     if (request.getOutputConfig() == null) {
         throw new IllegalArgumentException("OutputConfig cannot be null");
     }
-  
+        ExecutorService executor = Executors.newFixedThreadPool(8);
+
+    
+    List<Future<Void>> futures = new ArrayList<>();
 
     try {
         Iterable<Integer> integers = ds.read(request.getInputConfig());

@@ -37,7 +37,7 @@ public class CoordinatorImpl implements ComputationCoordinator {
     if (request.getOutputConfig() == null) {
         throw new IllegalArgumentException("OutputConfig cannot be null");
     }
-        ExecutorService executor = Executors.newFixedThreadPool(8);
+        
 
     
     List<Future<Void>> futures = new ArrayList<>();

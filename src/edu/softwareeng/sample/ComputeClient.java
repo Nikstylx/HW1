@@ -1,9 +1,9 @@
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import user_compute.NetworkAPI;
-import user_compute.ComputeServiceGrpc;
-import user_compute.ComputationRequest;
-import user_compute.ComputationResponse;
+import network_API.NetworkAPI;
+import network_API.ComputeServiceGrpc;
+import network_API.ComputationRequest;
+import network_API.ComputationResponse;
 
 import java.io.File;
 import java.util.Scanner;

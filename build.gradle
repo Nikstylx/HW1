@@ -1,6 +1,6 @@
-apply plugin: 'java'
-plugins {
-id 'com.google.protobuf' version '0.9.4'
+apply plugins {
+	'java'
+	id 'com.google.protobuf' version '0.9.4'
 }
 def grpcVersion = '1.59.1'
 def protobufVersion = '3.25.1'

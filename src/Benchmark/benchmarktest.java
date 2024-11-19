@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(org.openjdk.jmh.annotations.Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Thread)
-public class CoordinatorBenchmark {
+public class benchmarktest {
 
     private ComputeRequest requestV1;
     private ComputeRequest requestV2;

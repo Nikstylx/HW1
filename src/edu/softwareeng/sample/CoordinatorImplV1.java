@@ -11,7 +11,7 @@ public class CoordinatorImplV1 implements ComputationCoordinator {
     private final DataStore ds;
     private final ComputeEngine ce;
 
-    public CoordinatorImpl(DataStore ds, ComputeEngine ce) {
+    public CoordinatorImplV1(DataStore ds, ComputeEngine ce) {
         // Validate parameters
         if (ds == null) {
             throw new IllegalArgumentException("DataStore cannot be null");

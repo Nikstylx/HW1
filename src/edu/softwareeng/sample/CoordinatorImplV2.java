@@ -25,6 +25,7 @@ public class CoordinatorImplV2 implements ComputationCoordinator {
 
         this.ds = ds;
         this.ce = ce;
+        return;
     }
 
     @Override

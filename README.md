@@ -15,4 +15,5 @@ This implementation allows for improved performance when handling multiple compu
 
 CoordinatorImplV1 took 5.555ms while v2 was reduced to 4.123ms
 https://github.com/Nikstylx/HW1/blob/assign-8/src/Benchmark/Benchmarktest.java
+The initial implementation of the CoordinatorImpl class was inefficient because it used a fixed thread pool with a limited number of threads and blocked task execution sequentially. This approach caused delays and underutilized system resources when processing a large number of tasks concurrently.
 

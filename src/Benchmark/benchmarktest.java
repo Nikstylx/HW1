@@ -1,67 +1,59 @@
-import edu.softwareeng.sample.ComputeRequest;
-import edu.softwareeng.sample.ComputeEngine;
-import edu.softwareeng.sample.DataStore;
-import edu.softwareeng.sample.ComputeResult;
+package edu.softwareeng.benchmark;
+
 import edu.softwareeng.sample.CoordinatorImplV1;
 import edu.softwareeng.sample.CoordinatorImplV2;
+import edu.softwareeng.sample.ComputeRequest;
+import edu.softwareeng.sample.InputConfig;
+import edu.softwareeng.sample.OutputConfig;
+import edu.softwareeng.sample.DataStore;
+import edu.softwareeng.sample.ComputeEngine;
+
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.Future;
-import java.util.List;
-import java.util.ArrayList;
 
+@BenchmarkMode(org.openjdk.jmh.annotations.Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Thread)
 public class CoordinatorBenchmark {
 
-    private DataStore ds;
-    private ComputeEngine ce;
-    private ComputeRequest request;
+    private ComputeRequest requestV1;
+    private ComputeRequest requestV2;
+    private CoordinatorImplV1 coordinatorV1;
+    private CoordinatorImplV2 coordinatorV2;
 
     @Setup(Level.Trial)
     public void setup() {
-        // Set up the test data (assuming DataStore and ComputeEngine are simple to initialize)
-        ds = new DataStore();  // Mock DataStore or use actual implementation
-        ce = new ComputeEngine(); // Mock ComputeEngine or use actual implementation
-        request = new ComputeRequest(...); // Set up your ComputeRequest with valid configurations
+        // Create mock InputConfig and OutputConfig instances
+        InputConfig inputConfig = new InputConfig(); // Replace with actual constructor logic
+        OutputConfig outputConfig = new OutputConfig(); // Replace with actual constructor logic
+
+        // Create ComputeRequest instances for both V1 and V2
+        requestV1 = new ComputeRequest(inputConfig, outputConfig);
+        requestV2 = new ComputeRequest(inputConfig, outputConfig);
+
+        // Initialize your ComputeEngine and DataStore mock instances
+        ComputeEngine computeEngine = new ComputeEngine();
+        DataStore dataStore = new DataStore();
+
+        // Initialize the coordinators
+        coordinatorV1 = new CoordinatorImplV1(dataStore, computeEngine);
+        coordinatorV2 = new CoordinatorImplV2(dataStore, computeEngine);
     }
 
-    // Benchmark for the Original Method (Using Executors.newFixedThreadPool(8)) - CoordinatorImplV1
     @Benchmark
-    @BenchmarkMode(Mode.AverageTime) // Measure average execution time
-    @OutputTimeUnit(TimeUnit.MILLISECONDS) // Report in milliseconds
-    public void testOriginal() throws Exception {
-        // Create an instance of the old version (CoordinatorImplV1)
-        CoordinatorImplV1 coordinator = new CoordinatorImplV1(ds, ce);
-        long startTime = System.nanoTime();
-        coordinator.compute(request);  // Run the compute method of the original implementation
-        long endTime = System.nanoTime();
-        System.out.println("Original Method Time (V1): " + (endTime - startTime) / 1_000_000 + " ms");
+    public void testCoordinatorV1() {
+        coordinatorV1.compute(requestV1);
     }
 
-    // Benchmark for the Optimized Method (Using Executors.newCachedThreadPool()) - CoordinatorImplV2
     @Benchmark
-    @BenchmarkMode(Mode.AverageTime) // Measure average execution time
-    @OutputTimeUnit(TimeUnit.MILLISECONDS) // Report in milliseconds
-    public void testOptimized() throws Exception {
-        // Create an instance of the new version (CoordinatorImplV2)
-        CoordinatorImplV2 coordinator = new CoordinatorImplV2(ds, ce);
-        long startTime = System.nanoTime();
-        coordinator.compute(request);  // Run the compute method of the optimized implementation
-        long endTime = System.nanoTime();
-        System.out.println("Optimized Method Time (V2): " + (endTime - startTime) / 1_000_000 + " ms");
-    }
-
-    // Main method to run the benchmark
-    public static void main(String[] args) throws Exception {
-        org.openjdk.jmh.Main.main(args); // Start the JMH benchmark
+    public void testCoordinatorV2() {
+        coordinatorV2.compute(requestV2);
     }
 }

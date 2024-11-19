@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(org.openjdk.jmh.annotations.Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Thread)
-public class Benchmarktest {
+public class Benchmarktest implements InputConfig, OutputConfig, ComputeEngine, DataStore {
 
     private ComputeRequest requestV1;
     private ComputeRequest requestV2;
@@ -30,17 +30,13 @@ public class Benchmarktest {
 
     @Setup(Level.Trial)
     public void setup() {
-        // Create mock InputConfig and OutputConfig instances
-        InputConfig inputConfig = new InputConfig(); // Replace with actual constructor logic
-        OutputConfig outputConfig = new OutputConfig(); // Replace with actual constructor logic
+       
 
         // Create ComputeRequest instances for both V1 and V2
         requestV1 = new ComputeRequest(inputConfig, outputConfig);
         requestV2 = new ComputeRequest(inputConfig, outputConfig);
 
-        // Initialize your ComputeEngine and DataStore mock instances
-        ComputeEngine computeEngine = new ComputeEngine();
-        DataStore dataStore = new DataStore();
+    
 
         // Initialize the coordinators
         coordinatorV1 = new CoordinatorImplV1(dataStore, computeEngine);

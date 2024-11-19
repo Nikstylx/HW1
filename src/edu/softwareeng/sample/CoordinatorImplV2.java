@@ -9,7 +9,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.ExecutionException;
 
-public class CoordinatorImpl implements ComputationCoordinator {
+public class CoordinatorImplV2 implements ComputationCoordinator {
     
     private final DataStore ds;
     private final ComputeEngine ce;

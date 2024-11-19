@@ -13,3 +13,5 @@ Justification for Thread Count
 
 This implementation allows for improved performance when handling multiple computation requests simultaneously.
 
+CoordinatorImplV1 took 5.555ms while v2 was reduced to 4.123ms
+

@@ -22,6 +22,7 @@ public class CoordinatorImplV1 implements ComputationCoordinator {
 
         this.ds = ds;
         this.ce = ce;
+        return;
     }
 
     @Override

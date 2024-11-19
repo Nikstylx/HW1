@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.Future;
 
-public class CoordinatorImpl implements ComputationCoordinator {
+public class CoordinatorImplV1 implements ComputationCoordinator {
     
     private final DataStore ds;
     private final ComputeEngine ce;

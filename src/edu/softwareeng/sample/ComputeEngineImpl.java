@@ -8,6 +8,9 @@ public class ComputeEngineImpl implements ComputeEngine {
     @Override
     public String compute(int value) {
         try {
+            if (value < 0) {
+                throw new IllegalArgumentException("Value must not be negative.");
+            }
             // Assuming the input 'value' is the upper bound of the range,
             // and the lower bound is 2 (first prime number).
             int start = 2;
@@ -16,6 +19,10 @@ public class ComputeEngineImpl implements ComputeEngine {
             // Find prime numbers in the range [start, end]
             List<Integer> primes = findPrimesInRange(start, end);
             return primes.toString(); // Return primes as a string
+        } catch (IllegalArgumentException e) {
+            // Handle the case where the value is negative
+            System.err.println("Input validation error: " + e.getMessage());
+            throw e; // Re-throw the exception to notify the caller
         } catch (Exception e) {
             // Log the exception and throw a custom runtime exception
             // to prevent uncaught exceptions from reaching process boundaries.

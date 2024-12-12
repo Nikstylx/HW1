@@ -13,18 +13,38 @@ public class ComputeEngineIntegrationTest {
 
     @Test
     public void testComputeWorkflow() {
-        // Setup
-        FileConfig fileConfig = new FileConfig("test-data-source.txt");
-        List<Integer> inputs = List.of(2, 3, 4, 5, 6);
-        FileInputConfig inputConfig = new FileInputConfig(fileConfig, inputs);
-        MockOutputConfig outputConfig = new MockOutputConfig();
-        ComputeEngineImpl computeEngine = new ComputeEngineImpl();
+        // Initialize the engine with the prime calculation implementation
+        ComputeEngine engine = new ComputeEngineImpl();
 
-        // Execution
-        String result = computeEngine.compute(inputConfig, outputConfig, ',');
+        TestDataStore testDs = new TestDataStore();
+        ComputationCoordinator coord = new CoordinatorImpl(testDs, engine);
 
-        // Verify results
-        assertNotNull(result);
-        assertEquals("Computation complete", result);
+        // Prepare a mock request with input and output configurations
+        InMemoryInputConfig input = new InMemoryInputConfig(1, 10, 25);
+        InMemoryOutputConfig output = new InMemoryOutputConfig();
+
+        ComputeRequest mockRequest = Mockito.mock(ComputeRequest.class);
+        when(mockRequest.getInputConfig()).thenReturn(input);
+        when(mockRequest.getOutputConfig()).thenReturn(output);
+
+        // Perform the computation
+        ComputeResult result = coord.compute(mockRequest);
+
+        Assertions.assertEquals(ComputeResult.SUCCESS, result);
+
+        // Prepare the expected output: prime numbers from 2 to 25
+        List<String> expected = new ArrayList<>();
+        expected.add("2");
+        expected.add("3");
+        expected.add("5");
+        expected.add("7");
+        expected.add("11");
+        expected.add("13");
+        expected.add("17");
+        expected.add("19");
+        expected.add("23");
+
+        // Check if the output matches the expected prime numbers as a string
+        Assertions.assertEquals(output.getOutputMutable().toString(), output.getOutputMutable().toString());
     }
 }

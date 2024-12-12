@@ -33,7 +33,9 @@ public class ComputeEngineImpl implements ComputeEngine {
 
     // Helper method to check if a number is prime
     private boolean isPrime(int num) {
-        if (num <= 1) return false; // 0 and 1 are not prime numbers
+        if (num <= 1) {
+            return false; // 0 and 1 are not prime numbers
+        }
         for (int i = 2; i <= Math.sqrt(num); i++) {
             if (num % i == 0) {
                 return false; // Found a divisor, so it's not prime

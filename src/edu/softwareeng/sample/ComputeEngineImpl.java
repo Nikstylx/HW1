@@ -11,21 +11,20 @@ public class ComputeEngineImpl implements ComputeEngine {
             if (value < 0) {
                 throw new IllegalArgumentException("Value must not be negative.");
             }
-            // Assuming the input 'value' is the upper bound of the range,
-            // and the lower bound is 2 (first prime number).
+            
             int start = 2;
-            int end = value;  // End is the value passed to the method
-
+            int end = value;  // The value passed is the upper bound for the range
+            
             // Find prime numbers in the range [start, end]
             List<Integer> primes = findPrimesInRange(start, end);
-            return primes.toString(); // Return primes as a string
+            
+            // Return the prime numbers as a string representation of the list
+            return primes.toString();
+
         } catch (IllegalArgumentException e) {
-            // Handle the case where the value is negative
             System.err.println("Input validation error: " + e.getMessage());
-            throw e; // Re-throw the exception to notify the caller
+            throw e; // Re-throw to propagate the exception to the caller
         } catch (Exception e) {
-            // Log the exception and throw a custom runtime exception
-            // to prevent uncaught exceptions from reaching process boundaries.
             System.err.println("Error computing prime numbers: " + e.getMessage());
             throw new RuntimeException("Computation error: " + e.getMessage(), e);
         }
@@ -45,11 +44,11 @@ public class ComputeEngineImpl implements ComputeEngine {
     // Helper method to check if a number is prime
     private boolean isPrime(int num) {
         if (num <= 1) {
-            return false; // Numbers less than or equal to 1 are not prime
+            return false; // Numbers <= 1 are not prime
         }
-        for (int i = 2; i <= Math.sqrt(num); i++) { // Check divisibility up to the square root of the number
+        for (int i = 2; i <= Math.sqrt(num); i++) { // Check divisibility up to square root
             if (num % i == 0) {
-                return false; // If divisible by any number, it's not prime
+                return false; // If divisible, it's not prime
             }
         }
         return true; // The number is prime

@@ -40,7 +40,7 @@ public void compareMultiAndSingleThreaded() throws Exception {
     for (int i = 0; i < numThreads; i++) {
         File singleThreadedOut = new File(singleThreadFilePrefix + i);
         singleThreadedOut.deleteOnExit(); // Ensure the file is deleted after test
-        testUsers.get(i).run(singleThreadedOut.getCanonicalPath()); // Run each task sequentially
+        testUsers.get(i).run(singleThreadedOut.getAbsolutePath()); // Run each task sequentially
     }
 
     // Step 2: Run multi-threaded execution

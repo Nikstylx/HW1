@@ -1,5 +1,13 @@
-apply plugin: 'java'
-apply plugin: 'com.google.protobuf' // Add this for Protocol Buffers support
+plugins {
+    id 'java'
+    id 'com.google.protobuf' version '0.9.3'  // Add the correct version of the protobuf plugin
+}
+
+repositories {
+    mavenCentral()
+    // Add the plugin repository for Protobuf
+    google()
+}
 
 sourceSets {
     main {
@@ -12,10 +20,6 @@ sourceSets {
             srcDirs = ['test']
         }
     }
-}
-
-repositories {
-    mavenCentral()
 }
 
 dependencies {

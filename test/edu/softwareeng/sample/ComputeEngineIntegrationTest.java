@@ -35,4 +35,3 @@ public class ComputeEngineIntegrationTest {
         Assertions.assertEquals(expected, output.getOutputMutable());
     }
 }
-}

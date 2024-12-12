@@ -35,8 +35,8 @@ public class TestMultiUser {
         }
         
         // Run single-threaded
-       String multiThreadFilePrefix = "testMultiUser.compareMultiAndSingleThreaded.test.multiThreadOut.tmp";
-    for (int i = 0; i < numThreads; i++) {
+        String multiThreadFilePrefix = "testMultiUser.compareMultiAndSingleThreaded.test.multiThreadOut.tmp";
+        for (int i = 0; i < numThreads; i++) {
         File multiThreadedOut = new File(multiThreadFilePrefix + i);
         multiThreadedOut.deleteOnExit();
         String multiThreadOutputPath = multiThreadedOut.getCanonicalPath();

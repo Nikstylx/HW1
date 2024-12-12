@@ -46,16 +46,32 @@ public class CoordinatorImpl implements ComputationCoordinator {
         List<Callable<Void>> tasks = new ArrayList<>();
 
         try {
+            // Get the input values from DataStore
             Iterable<Integer> integers = ds.read(request.getInputConfig());
             for (int val : integers) {
                 tasks.add(() -> {
-                    ds.appendSingleResult(request.getOutputConfig(), ce.compute(val), request.getDelimiter());
-                    return null;
+                    // Handle appending results to DataStore
+                    try {
+                        ds.appendSingleResult(request.getOutputConfig(), ce.compute(val), request.getDelimiter());
+                    } catch (Exception e) {
+                        System.err.println("Error processing value " + val + ": " + e.getMessage());
+                    }
+                    return null;  // No result needed for Callable
                 });
             }
 
             // Use invokeAll to handle tasks more efficiently
-            executor.invokeAll(tasks);
+            List<Future<Void>> futures = executor.invokeAll(tasks);
+
+            // Check for any exceptions thrown by tasks
+            for (Future<Void> future : futures) {
+                try {
+                    future.get(); // Check if any task threw an exception
+                } catch (ExecutionException e) {
+                    System.err.println("Error during computation: " + e.getMessage());
+                    throw new RuntimeException("Computation error: " + e.getMessage(), e);
+                }
+            }
 
             return ComputeResult.SUCCESS;
         } catch (Exception e) {
@@ -63,6 +79,13 @@ public class CoordinatorImpl implements ComputationCoordinator {
             throw new RuntimeException("Computation error: " + e.getMessage(), e);
         } finally {
             executor.shutdown(); // Properly shut down the executor
+            try {
+                if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                    executor.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                executor.shutdownNow();
+            }
         }
     }
 }

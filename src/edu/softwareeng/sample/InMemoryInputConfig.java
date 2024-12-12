@@ -1,18 +1,16 @@
 package edu.softwareeng.sample;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class InMemoryInputConfig implements InputConfig {
-    
-    private final List<Integer> inputs;
+    private FileConfig fileConfig;
 
-    public InMemoryInputConfig(List<Integer> inputs) {
-        this.inputs = new ArrayList<>(inputs);
+    public InMemoryInputConfig(FileConfig fileConfig) {
+        this.fileConfig = fileConfig;
     }
 
     @Override
-    public List<Integer> getInputs() {
-        return inputs;
+    public void visitInputConfig(Consumer<FileConfig> consumer) {
+        consumer.accept(fileConfig);
     }
 }

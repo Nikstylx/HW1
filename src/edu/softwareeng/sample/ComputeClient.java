@@ -1,36 +1,43 @@
+package edu.softwareeng.sample;
+
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import compute.ComputeServiceGrpc;
 import compute.ComputeRequest;
 import compute.ComputeResponse;
 
+import java.util.Scanner;
+
 public class ComputeClient {
-
     public static void main(String[] args) {
-        // Connect to the server
+        // Set up the gRPC channel
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051)
-            .usePlaintext()  // Disable encryption for simplicity
+            .usePlaintext()  // For simplicity, no encryption
             .build();
-
-        // Create a stub to call the remote method
+        
         ComputeServiceGrpc.ComputeServiceBlockingStub stub = ComputeServiceGrpc.newBlockingStub(channel);
-
-        // Create a request (replace with user input or file reading logic)
+        
+        // Prompt user for input
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number for computation: ");
+        int inputValue = scanner.nextInt();
+        
+        // Build the request object
         ComputeRequest request = ComputeRequest.newBuilder()
-            .setInputType("list")  // Could be "file" or "list"
-            .setInputData("1,2,3,4,5")  // Example input (could be a file name)
-            .setOutputFile("output.txt")
-            .setDelimiter(",")
+            .setInputValue(inputValue)
             .build();
-
-        // Make the RPC call
+        
+        // Send the request to the server and get the response
         ComputeResponse response = stub.computeNumbers(request);
-
+        
         // Print the result
-        System.out.println("Computation Status: " + response.getSuccess());
-        System.out.println("Message: " + response.getMessage());
+        if (response.getSuccess()) {
+            System.out.println("Computation successful. Result: " + response.getResult());
+        } else {
+            System.err.println("Computation failed: " + response.getMessage());
+        }
 
-        // Shut down the channel
+        // Close the channel
         channel.shutdown();
     }
 }

@@ -58,6 +58,7 @@ public class TestMultiUser {
             try {
                 future.get();
             } catch (Exception e) {
+                e.printStackTrace(); // Print the stack trace for better debugging
                 throw new RuntimeException(e);
             }
         });
@@ -72,7 +73,11 @@ public class TestMultiUser {
         List<String> result = new ArrayList<>();
         for (int i = 0; i < numThreads; i++) {
             File multiThreadedOut = new File(prefix + i);
-            result.addAll(Files.readAllLines(multiThreadedOut.toPath()));
+            if (!multiThreadedOut.exists()) {
+                System.err.println("Output file " + multiThreadedOut.getCanonicalPath() + " does not exist.");
+            } else {
+                result.addAll(Files.readAllLines(multiThreadedOut.toPath()));
+            }
         }
         return result;
     }

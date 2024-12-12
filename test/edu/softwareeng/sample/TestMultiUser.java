@@ -38,7 +38,8 @@ public class TestMultiUser {
         for (int i = 0; i < numThreads; i++) {
             File singleThreadedOut = new File(singleThreadFilePrefix + i);
             singleThreadedOut.deleteOnExit();
-            testUsers.get(i).run(singleThreadedOut.getCanonicalPath());
+            TestUser = testUsers.get(i)
+            TestUser.run(singleThreadedOut.getCanonicalPath());
         }
         
         // Run multi threaded

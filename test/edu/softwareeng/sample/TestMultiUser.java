@@ -35,12 +35,14 @@ public class TestMultiUser {
         }
         
         // Run single-threaded
-        String singleThreadFilePrefix = "testMultiUser.compareMultiAndSingleThreaded.test.singleThreadOut.tmp";
-        for (int i = 0; i < numThreads; i++) {
-            File singleThreadedOut = new File(singleThreadFilePrefix + i);
-            singleThreadedOut.deleteOnExit();
-            testUsers.get(i).run(singleThreadedOut.getCanonicalPath());
-        }
+       String multiThreadFilePrefix = "testMultiUser.compareMultiAndSingleThreaded.test.multiThreadOut.tmp";
+for (int i = 0; i < numThreads; i++) {
+    File multiThreadedOut = new File(multiThreadFilePrefix + i);
+    multiThreadedOut.deleteOnExit();
+    String multiThreadOutputPath = multiThreadedOut.getCanonicalPath();
+    TestUser testUser = testUsers.get(i);
+    results.add(threadPool.submit(() -> testUser.run(multiThreadOutputPath)));
+}
         
         // Run multi-threaded
         ExecutorService threadPool = Executors.newCachedThreadPool();

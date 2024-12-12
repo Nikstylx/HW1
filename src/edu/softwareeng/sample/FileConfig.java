@@ -1,13 +1,13 @@
 package edu.softwareeng.sample;
 
 public class FileConfig {
-    private String filePath;
+    private String fileName;
 
-    public FileConfig(String filePath) {
-        this.filePath = filePath;
+    public FileConfig(String fileName) {
+        this.fileName = fileName;
     }
 
-    public String getFilePath() {
-        return filePath;
+    public String getFileName() {
+        return fileName;
     }
 }

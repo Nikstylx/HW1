@@ -1,5 +1,6 @@
 package edu.softwareeng.sample;
 
+import java.util.Collections;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

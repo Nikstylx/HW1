@@ -13,4 +13,11 @@ public class InMemoryInputConfig implements InputConfig {
     public void visitInputConfig(Consumer<FileConfig> consumer) {
         consumer.accept(fileConfig);
     }
+    @Override
+public List<Integer> getInputs() {
+    // Return the list of inputs; assuming `inputs` is a member variable
+    return this.inputs;
+}
+
+    
 }

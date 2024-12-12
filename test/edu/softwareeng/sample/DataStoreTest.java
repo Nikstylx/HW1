@@ -68,26 +68,34 @@ public class DataStoreTest {
     }
 
     @Test
-    public void testRead() throws Exception {
-        // Create a file with some test data
-        File file = new File("dataStoreTest.testRead.txt.temp");
-        file.createNewFile();
-        file.deleteOnExit();
-        FileWriter writer = new FileWriter(file, true);
-        writer.append("1\n");
-        writer.append("2\n");
-        writer.close();
+public void testRead() throws Exception {
+    // Create a file with some test data
+    File file = new File("dataStoreTest.testRead.txt.temp");
+    file.createNewFile();
+    file.deleteOnExit();
+    FileWriter writer = new FileWriter(file, true);
+    writer.append("1\n");
+    writer.append("2\n");
+    writer.close();
 
-        InputConfig inputConfig = new FileInputConfig(file.getCanonicalPath());
+    InputConfig inputConfig = new FileInputConfig(file.getCanonicalPath());
 
-        DataStore dataStore = new DataStoreImpl();
-        Iterator<Integer> iterator = dataStore.read(inputConfig).iterator();
-        
-        // Check that we can read the values from the file
-        Assertions.assertTrue(iterator.hasNext());
-        Assertions.assertEquals(1, iterator.next().intValue());
-        Assertions.assertTrue(iterator.hasNext());
-        Assertions.assertEquals(2, iterator.next().intValue());
-        Assertions.assertFalse(iterator.hasNext());
+    DataStore dataStore = new DataStoreImpl();
+
+    // Use the Iterable directly in a for-each loop
+    Iterable<Integer> numbers = dataStore.read(inputConfig);
+
+    int count = 0;
+    for (int number : numbers) {
+        if (count == 0) {
+            Assertions.assertEquals(1, number);
+        } else if (count == 1) {
+            Assertions.assertEquals(2, number);
+        }
+        count++;
     }
+
+    // Ensure we have read exactly 2 numbers
+    Assertions.assertEquals(2, count);
+}
 }

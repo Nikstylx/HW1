@@ -1,16 +1,7 @@
 package edu.softwareeng.sample;
 
-public interface OutputConfig {
+import java.util.List;
 
-	static interface OutputConfigVisitor {
-		public void visitFile(FileOutputConfig fileOutputConfig);
-	}
-	
-	static void visitOutputConfig(OutputConfig config, OutputConfigVisitor visitor) {
-		if (config instanceof FileOutputConfig) {
-			visitor.visitFile((FileOutputConfig) config);
-		} else {
-			throw new RuntimeException("Unexpected config type: " + config.getClass());
-		}
-	}
+public interface OutputConfig {
+    void appendResults(List<String> results, char delimiter);
 }

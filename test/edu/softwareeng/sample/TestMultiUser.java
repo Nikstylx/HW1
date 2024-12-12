@@ -56,6 +56,8 @@ public class TestMultiUser {
         for (Future<?> result : results) {
             result.get();
         }
+        Collections.sort(singleThreadedOutput);
+        Collections.sort(multiThreadedOutput);
 
         // Check that the output is the same for multi-threaded and single-threaded
         assert singleThreadedOutput.equals(multiThreadedOutput) : "Outputs don't match!";

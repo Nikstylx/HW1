@@ -59,8 +59,6 @@ public void smokeTestWrite() throws Exception {
         Assertions.assertEquals(WriteResultStatus.SUCCESS, WriteResultStatus.SUCCESS);
 
         String expected = "result1;result2;";
-        List<String> allLines = Files.readAllLines(file.toPath());
-
         
     }
 

@@ -1,36 +1,46 @@
-@Test
-public void testComputeWorkflow() {
-    ComputeEngine engine = new ComputeEngineImpl();
-    TestDataStore testDs = new TestDataStore();
-    ComputationCoordinator coord = new CoordinatorImpl(testDs, engine);
+package edu.softwareeng.sample;
 
-    InMemoryInputConfig input = new InMemoryInputConfig(1, 10, 25);
-    InMemoryOutputConfig output = new InMemoryOutputConfig();
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
-    ComputeRequest mockRequest = Mockito.mock(ComputeRequest.class);
-    when(mockRequest.getInputConfig()).thenReturn(input);
-    when(mockRequest.getOutputConfig()).thenReturn(output);
+import java.util.ArrayList;
+import java.util.List;
 
-    ComputeResult result = coord.compute(mockRequest);
+public class ComputeEngineIntegrationTest {
 
-    // Manually checking the result using if statements
-    if (result != ComputeResult.SUCCESS) {
-        throw new AssertionError("Expected result to be SUCCESS, but was " + result);
-    }
+    @Test
+    public void testComputeWorkflow() {
+        // Create instances of ComputeEngine and necessary configurations
+        ComputeEngine engine = new ComputeEngineImpl();
+        TestDataStore testDs = new TestDataStore();
+        ComputationCoordinator coord = new CoordinatorImpl(testDs, engine);
 
-    List<String> expected = new ArrayList<>();
-    expected.add("1");
-    expected.add("10");
-    expected.add("25");
+        // Setup the input configuration
+        InMemoryInputConfig input = new InMemoryInputConfig(1, 10, 25, -5, 7); // Adding negative number for validation
+        InMemoryOutputConfig output = new InMemoryOutputConfig();
 
-    // Manually checking the output
-    if (output.getOutputMutable().size() != expected.size()) {
-        throw new AssertionError("Expected output size to be " + expected.size() + ", but was " + output.getOutputMutable().size());
-    }
+        // Mock the compute request
+        ComputeRequest mockRequest = Mockito.mock(ComputeRequest.class);
+        Mockito.when(mockRequest.getInputConfig()).thenReturn(input);
+        Mockito.when(mockRequest.getOutputConfig()).thenReturn(output);
 
-    for (int i = 0; i < expected.size(); i++) {
-        if (!expected.get(i).equals(output.getOutputMutable().get(i))) {
-            throw new AssertionError("Expected output at index " + i + " to be " + expected.get(i) + ", but was " + output.getOutputMutable().get(i));
-        }
+        // Perform the computation using the coordinator
+        ComputeResult result = coord.compute(mockRequest);
+
+        // Assert the result is successful
+        Assertions.assertEquals(ComputeResult.SUCCESS, result);
+
+        // Check the output to ensure it handles both valid and invalid numbers
+        List<String> expected = new ArrayList<>();
+        expected.add("1");
+        expected.add("10");
+        expected.add("25");
+        expected.add("Invalid input: -5");  // Expecting an error message for the negative number
+        expected.add("7");
+        Assertions.assertEquals(expected, output.getOutputMutable());
+
+        // Assert the computed result matches the expected output
+        
     }
 }

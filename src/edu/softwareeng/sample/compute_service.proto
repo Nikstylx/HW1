@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package compute;
+
+// The compute service definition.
+service ComputeService {
+  // Method to process numbers for computation.
+  rpc computeNumbers (ComputeRequest) returns (ComputeResponse);
+}
+
+// Request message to send computation data.
+message ComputeRequest {
+  string inputType = 1; // Type of input (file or list)
+  string inputData = 2; // Data (file name or numbers as a string)
+  string outputFile = 3; // Output file path
+  string delimiter = 4;  // Delimiter for output file
+}
+
+// Response message with computation results.
+message ComputeResponse {
+  bool success = 1;   // Whether the computation succeeded
+  string message = 2; // Success or failure message
+}

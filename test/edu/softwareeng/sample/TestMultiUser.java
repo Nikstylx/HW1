@@ -60,6 +60,8 @@ public class TestMultiUser {
         Collections.sort(singleThreadedOutput);
         Collections.sort(multiThreadedOutput);
 
+        Assert.assertEquals("Outputs don't match!", singleThreadedOutput, multiThreadedOutput);
+
         
     }
 }

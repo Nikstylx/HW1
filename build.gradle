@@ -1,33 +1,19 @@
 plugins {
     id 'java'
-    id 'com.google.protobuf' version '0.9.3'  // Add the correct version of the protobuf plugin
+    id 'com.google.protobuf' version '0.9.3'  // Add protobuf plugin
 }
 
 repositories {
     mavenCentral()
-    // Add the plugin repository for Protobuf
-    google()
-}
-
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src']
-        }
-    }
-    test {
-        java {
-            srcDirs = ['test']
-        }
-    }
+    google()  // Google's repository
 }
 
 dependencies {
-    // gRPC dependencies
-    implementation 'io.grpc:grpc-netty:1.55.0'    // gRPC transport
-    implementation 'io.grpc:grpc-stub:1.55.0'     // gRPC stub (client and server stubs)
-    implementation 'io.grpc:grpc-protobuf:1.55.0' // gRPC protobuf
-    implementation 'com.google.protobuf:protobuf-java:3.24.0' // Protocol Buffers Java API
+    // gRPC dependencies (using stable versions available)
+    implementation 'io.grpc:grpc-netty:1.47.0'    // gRPC transport
+    implementation 'io.grpc:grpc-stub:1.47.0'     // gRPC stub (client and server stubs)
+    implementation 'io.grpc:grpc-protobuf:1.47.0' // gRPC protobuf
+    implementation 'com.google.protobuf:protobuf-java:3.21.9' // Protocol Buffers Java API
 
     // Testing dependencies
     testImplementation('junit:junit:4.12')
@@ -41,19 +27,4 @@ test {
     useJUnitPlatform()
 }
 
-// Add protobuf plugin configuration for code generation
-protobuf {
-    protoc {
-        artifact = 'com.google.protobuf:protoc:3.24.0'  // Specify the version of the protobuf compiler
-    }
-    plugins {
-        grpc {
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.55.0' // Specify the gRPC plugin for protoc
-        }
-    }
-    generateProtoTasks {
-        all()*.plugins {
-            grpc {}
-        }
-    }
-}
+// Add p

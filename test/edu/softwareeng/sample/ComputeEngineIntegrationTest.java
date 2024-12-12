@@ -1,7 +1,9 @@
 package edu.softwareeng.sample;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.List;
 
 public class ComputeEngineIntegrationTest {
 
@@ -11,7 +13,7 @@ public class ComputeEngineIntegrationTest {
         FileConfig fileConfig = new FileConfig("test-data-source.txt");
         List<Integer> inputs = List.of(2, 3, 4, 5, 6);
         FileInputConfig inputConfig = new FileInputConfig(fileConfig, inputs);
-        OutputConfig outputConfig = new MockOutputConfig();
+        MockOutputConfig outputConfig = new MockOutputConfig();
         ComputeEngineImpl computeEngine = new ComputeEngineImpl();
 
         // Execution

@@ -1,22 +1,22 @@
 package edu.softwareeng.sample;
 
+import java.io.File;
+
 /**
- * Supports a text file input of numbers, one number per line.
- * 
- * Ex:
- * 1
- * 2
- * 10
+ * Input configuration that reads from a file.
  */
 public class FileInputConfig implements InputConfig {
+    
+    private final String fileName;
 
-	private final String fileName;
+    public FileInputConfig(String fileName) {
+        if (fileName == null || fileName.trim().isEmpty()) {
+            throw new IllegalArgumentException("File name cannot be null or empty");
+        }
+        this.fileName = fileName;
+    }
 
-	public FileInputConfig(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public String getFileName() {
-		return fileName;
-	}
+    public String getFileName() {
+        return fileName;
+    }
 }

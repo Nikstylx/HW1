@@ -1,15 +1,10 @@
 package edu.softwareeng.sample;
 
-import java.util.Collections;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,9 +16,10 @@ public class TestMultiUser {
 
     @BeforeEach
     public void initializeComputeEngine() {
-        // Setup the coordinator for the tests
         DataStore dataStore = new DataStoreImpl();
         ComputeEngine computeEngine = new ComputeEngineImpl();
+        
+        // Set up the coordinator
         coordinator = new CoordinatorImpl(dataStore, computeEngine);
     }
 
@@ -57,12 +53,16 @@ public class TestMultiUser {
         for (Future<?> result : results) {
             result.get();
         }
+
+        // Debugging: Print both outputs to check if they match
+        System.out.println("Single Threaded Output: " + singleThreadedOutput);
+        System.out.println("Multi Threaded Output: " + multiThreadedOutput);
+
+        // Sort the lists to ensure the order doesn't affect comparison
         Collections.sort(singleThreadedOutput);
         Collections.sort(multiThreadedOutput);
 
+        // Check that the output is the same for multi-threaded and single-threaded
         Assert.assertEquals("Outputs don't match!", singleThreadedOutput, multiThreadedOutput);
-
-        
     }
 }
-

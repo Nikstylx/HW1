@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package datastoreservice;
+
+// Request message for storing data
+message StoreDataRequest {
+    string key = 1;
+    string value = 2;
+}
+
+// Response message for storing data
+message StoreDataResponse {
+    bool success = 1;
+}
+
+// Request message for retrieving data
+message GetDataRequest {
+    string key = 1;
+}
+
+// Response message for retrieving data
+message GetDataResponse {
+    string value = 1;
+}
+
+// The DataStore service definition
+service DataStoreService {
+    rpc StoreData(StoreDataRequest) returns (StoreDataResponse);
+    rpc GetData(GetDataRequest) returns (GetDataResponse);
+}

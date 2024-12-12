@@ -1,7 +1,10 @@
 package edu.softwareeng.sample;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Assertions.assertTrue;
+// and other necessary imports explicitly
+
 
 public class InMemoryDataStoreTest {
 

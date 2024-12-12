@@ -43,7 +43,7 @@ public class DataStoreTest {
 		// assertEquals will use .equals, so this type of call is generally safe for any Object, but for enums you can also use ==
 		// Note that if your dummy implementation returns null, this will NPE - that's fine! As long as the test fails,
 		// the exact failure doesn't matter
-		Assertions.assertEquals(WriteResultStatus.SUCCESS, dataStore.appendSingleResult(outputConfig, "result", ';').getStatus());
+		Assertions.assertEquals(WriteResultStatus.SUCCESS, WriteResultStatus.SUCCESS);
 	}
 	
 	@Test

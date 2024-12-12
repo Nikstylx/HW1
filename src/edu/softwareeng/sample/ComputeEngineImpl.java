@@ -1,26 +1,9 @@
 package edu.softwareeng.sample;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ComputeEngineImpl implements ComputeEngine {
-
-    @Override
-    public String compute(InputConfig inputConfig, OutputConfig outputConfig, char delimiter) {
-        List<Integer> inputs = inputConfig.getInputs();  // Get the inputs from the InputConfig
-        List<String> results = new ArrayList<>();
-
-        for (int input : inputs) {
-            if (isPrime(input)) {
-                results.add(input + " is prime");
-            } else {
-                results.add(input + " is not prime");
-            }
-        }
-
-        outputConfig.appendResults(results, delimiter);  // Append results to OutputConfig
-        return "Computation complete";
-    }
 
     @Override
     public String compute(int value) {
@@ -28,13 +11,13 @@ public class ComputeEngineImpl implements ComputeEngine {
             if (value < 0) {
                 throw new IllegalArgumentException("Value must not be negative.");
             }
-
+            
             int start = 2;
             int end = value;  // The value passed is the upper bound for the range
-
+            
             // Find prime numbers in the range [start, end]
             List<Integer> primes = findPrimesInRange(start, end);
-
+            
             // Return the prime numbers as a string representation of the list
             return primes.toString();
 
@@ -47,6 +30,18 @@ public class ComputeEngineImpl implements ComputeEngine {
         }
     }
 
+    // Helper method to find prime numbers in a given range
+    private List<Integer> findPrimesInRange(int start, int end) {
+        List<Integer> primes = new ArrayList<>();
+        for (int i = start; i <= end; i++) {
+            if (isPrime(i)) {
+                primes.add(i);
+            }
+        }
+        return primes;
+    }
+
+    // Helper method to check if a number is prime
     private boolean isPrime(int num) {
         if (num <= 1) {
             return false; // Numbers <= 1 are not prime
@@ -57,16 +52,5 @@ public class ComputeEngineImpl implements ComputeEngine {
             }
         }
         return true; // The number is prime
-    }
-
-    // Helper method to find prime numbers in a given range
-    private List<Integer> findPrimesInRange(int start, int end) {
-        List<Integer> primes = new ArrayList<>();
-        for (int i = start; i <= end; i++) {
-            if (isPrime(i)) {
-                primes.add(i);
-            }
-        }
-        return primes;
     }
 }

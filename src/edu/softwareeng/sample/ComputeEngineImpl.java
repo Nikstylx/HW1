@@ -6,7 +6,7 @@ import java.util.List;
 public class ComputeEngineImpl implements ComputeEngine {
 
     @Override
-    public String compute(int value) {
+    public List<String> compute(int value) {
         try {
             if (value < 0) {
                 throw new IllegalArgumentException("Value must not be negative.");

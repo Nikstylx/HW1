@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
-
 import edu.softwareeng.sample.WriteResult.WriteResultStatus;
 
 public class DataStoreImpl implements DataStore {

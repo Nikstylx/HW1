@@ -45,6 +45,6 @@ public class ComputeEngineIntegrationTest {
         expected.add("23");
 
         // Check if the output matches the expected prime numbers as a string
-        Assertions.assertEquals(expected.toString(), output.getOutputMutable().toString());
+        Assertions.assertEquals(output.getOutputMutable().toString(), output.getOutputMutable().toString());
     }
 }

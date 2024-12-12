@@ -59,12 +59,6 @@ public class DataStoreImpl implements DataStore {
                         throw new RuntimeException("Error reading from file: " + e.getMessage(), e);
                     }
                 }
-
-                @Override
-                protected void finalize() throws Throwable {
-                    super.finalize();
-                    bufferedReader.close();
-                }
             };
 
         } catch (IOException e) {

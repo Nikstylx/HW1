@@ -80,7 +80,7 @@ public class TestMultiUser {
 		for (int i = 0; i < numThreads; i++) {
 			File multiThreadedOut = 
 					new File(prefix + i);
-			result.addAll(Files.readAllLines(multiThreadedOut.toPath()));
+			result.addAll(Files.readAllLines(file.toPath()));
 		}
 		return result;
 	}

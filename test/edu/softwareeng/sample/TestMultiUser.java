@@ -27,58 +27,62 @@ public class TestMultiUser {
 
     @Test
 public void compareMultiAndSingleThreaded() throws Exception {
-    int numThreads = 4; // Number of threads or tasks to run
+    int numThreads = 4;
     List<TestUser> testUsers = new ArrayList<>();
     
-    String filePath = getClass().getResource("/testInputFile.test").getPath();
-    // Initialize test users (one for each task)
+    // Create a temporary test input file dynamically
+    File testInputFile = new File("testInputFile.test");
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(testInputFile))) {
+        writer.write("1\n15\n10\n5\n2\n3\n8\n");  // Example test data
+    }
+
     for (int i = 0; i < numThreads; i++) {
         testUsers.add(new TestUser(coordinator));
     }
 
-    // Step 1: Run single-threaded execution
-    String singleThreadFilePrefix = "testSingleUser.compareMultiAndSingleThreaded.singleThreadOut.tmp";
+    // Run single-threaded
+    String singleThreadFilePrefix = "testMultiUser.compareMultiAndSingleThreaded.test.singleThreadOut.tmp";
     for (int i = 0; i < numThreads; i++) {
         File singleThreadedOut = new File(singleThreadFilePrefix + i);
-        singleThreadedOut.deleteOnExit(); // Ensure the file is deleted after test
-        testUsers.get(i).run(singleThreadedOut.getAbsolutePath()); // Run each task sequentially
+        singleThreadedOut.deleteOnExit();
+        testUsers.get(i).run(singleThreadedOut.getCanonicalPath());
     }
 
-    // Step 2: Run multi-threaded execution
-    ExecutorService threadPool = Executors.newCachedThreadPool(); // Create a thread pool for multi-threaded execution
+    // Run multi-threaded
+    ExecutorService threadPool = Executors.newCachedThreadPool();
     List<Future<?>> results = new ArrayList<>();
-    String multiThreadFilePrefix = "testMultiUser.compareMultiAndSingleThreaded.multiThreadOut.tmp";
+    String multiThreadFilePrefix = "testMultiUser.compareMultiAndSingleThreaded.test.multiThreadOut.tmp";
     for (int i = 0; i < numThreads; i++) {
         File multiThreadedOut = new File(multiThreadFilePrefix + i);
-        multiThreadedOut.deleteOnExit(); // Ensure the file is deleted after test
+        multiThreadedOut.deleteOnExit();
         String multiThreadOutputPath = multiThreadedOut.getCanonicalPath();
         TestUser testUser = testUsers.get(i);
-        results.add(threadPool.submit(() -> testUser.run(multiThreadOutputPath))); // Run tasks concurrently
+        results.add(threadPool.submit(() -> testUser.run(multiThreadOutputPath)));
     }
 
-    // Wait for all threads to finish
-    for (Future<?> future : results) {
-        future.get(); // Ensure all tasks have completed
-    }
+    results.forEach(future -> {
+        try {
+            future.get();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    });
 
-    // Step 3: Load output files from single-threaded execution
-    List<String> singleThreadedOutput = loadAllOutput(singleThreadFilePrefix, numThreads);
+    // Check that the output is the same for multi-threaded and single-threaded
+    List<String> singleThreaded = loadAllOutput(singleThreadFilePrefix, numThreads);
+    List<String> multiThreaded = loadAllOutput(multiThreadFilePrefix, numThreads);
+    Assert.assertEquals(singleThreaded, multiThreaded);
 
-    // Step 4: Load output files from multi-threaded execution
-    List<String> multiThreadedOutput = loadAllOutput(multiThreadFilePrefix, numThreads);
-
-    // Step 5: Compare both outputs
-    Assert.assertEquals("The output of single-threaded and multi-threaded execution should be the same.", 
-                        singleThreadedOutput, multiThreadedOutput);
+    // Clean up the test input file after the test
+    testInputFile.delete();
 }
 
-// Helper method to load all output lines from multiple files
 private List<String> loadAllOutput(String prefix, int numThreads) throws IOException {
     List<String> result = new ArrayList<>();
     for (int i = 0; i < numThreads; i++) {
-        File outputFile = new File(prefix + i); // Load the output file for each thread
-        result.addAll(Files.readAllLines(outputFile.toPath())); // Read all lines from the file
+        File multiThreadedOut = new File(prefix + i);
+        result.addAll(Files.readAllLines(multiThreadedOut.toPath()));
     }
-    return result; // Return the accumulated output
+    return result;
 }
 }

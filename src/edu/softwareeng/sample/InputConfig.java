@@ -1,8 +1,8 @@
 package edu.softwareeng.sample;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public interface InputConfig {
-    // Define visitInputConfig as an abstract method
     void visitInputConfig(Consumer<FileConfig> consumer);
+    List<Integer> getInputs();
 }

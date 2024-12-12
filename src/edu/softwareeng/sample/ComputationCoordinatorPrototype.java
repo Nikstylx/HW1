@@ -2,7 +2,7 @@ package edu.softwareeng.sample;
 
 public class ComputationCoordinatorPrototype {
 	
-	InputConfig inputConfig = new InputConfig() {
+	InputConfig inputConfig = new InputConfig();
     @Override
     public List<Integer> getInputs() {
         return Arrays.asList(1, 2, 3, 4);  // Example: return a list of integers

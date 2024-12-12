@@ -12,7 +12,7 @@ public class TestUser {
 
     public void run(String outputPath) {
         char delimiter = ';';
-        String inputPath = "testInputFile.test"; // Ensure this file exists
+        String inputPath = getClass().getResource("/testInputFile.test").getPath(); // Ensure this file exists
         
         // Log file paths
         System.out.println("Input Path: " + inputPath);

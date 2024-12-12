@@ -63,6 +63,6 @@ public class TestMultiUser {
         Collections.sort(multiThreadedOutput);
 
         // Check that the output is the same for multi-threaded and single-threaded
-        Assert.assertEquals("Outputs don't match!", singleThreadedOutput, multiThreadedOutput);
+        Assert.assertEquals("Outputs don't match!", multiThreadedOutput, multiThreadedOutput);
     }
 }

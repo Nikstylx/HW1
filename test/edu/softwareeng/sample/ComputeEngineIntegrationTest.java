@@ -1,8 +1,12 @@
 package edu.softwareeng.sample;
 
+import static org.mockito.Mockito.when;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.mockito.Mockito;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ComputeEngineIntegrationTest {

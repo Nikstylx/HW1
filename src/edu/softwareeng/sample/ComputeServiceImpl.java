@@ -1,5 +1,3 @@
-package edu.softwareeng.sample;
-
 import io.grpc.stub.StreamObserver;
 import compute.ComputeServiceGrpc;
 import compute.ComputeRequest;
@@ -7,34 +5,38 @@ import compute.ComputeResponse;
 
 public class ComputeServiceImpl extends ComputeServiceGrpc.ComputeServiceImplBase {
 
+    // Override the computeNumbers method to handle incoming requests
     @Override
     public void computeNumbers(ComputeRequest request, StreamObserver<ComputeResponse> responseObserver) {
+        boolean success = true;
+        String message = "Computation completed successfully";
+
         try {
-            // Get the input value from the request
-            int inputValue = request.getInputValue();
-            
-            // Create the compute engine to calculate primes
-            ComputeEngine engine = new ComputeEngineImpl();
-            String result = engine.compute(inputValue);
-            
-            // Prepare the response
-            ComputeResponse response = ComputeResponse.newBuilder()
-                .setSuccess(true)
-                .setResult(result)
-                .setMessage("Computation successful")
-                .build();
-            
-            // Send the response back to the client
-            responseObserver.onNext(response);
-            responseObserver.onCompleted();
+            // Extract request data
+            String inputType = request.getInputType();
+            String inputData = request.getInputData();
+            String outputFile = request.getOutputFile();
+            String delimiter = request.getDelimiter();
+
+            // Here, implement your computation logic based on the request details.
+            // You can read the input file, process the numbers, and write the result to the output file.
+
+            // For now, we simulate success
+            // If something goes wrong, set success to false and update the message accordingly
+
         } catch (Exception e) {
-            // Handle any errors and send back the failure response
-            ComputeResponse response = ComputeResponse.newBuilder()
-                .setSuccess(false)
-                .setMessage("Error: " + e.getMessage())
-                .build();
-            responseObserver.onNext(response);
-            responseObserver.onCompleted();
+            success = false;
+            message = "Error during computation: " + e.getMessage();
         }
+
+        // Create the response
+        ComputeResponse response = ComputeResponse.newBuilder()
+            .setSuccess(success)
+            .setMessage(message)
+            .build();
+
+        // Send the response back to the client
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 }

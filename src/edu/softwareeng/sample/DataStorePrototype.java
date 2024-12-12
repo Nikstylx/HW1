@@ -45,4 +45,8 @@ public class DataStorePrototype {
 			}
 		}
 	}
+	public WriteResultStatus getStatus() {
+    return this.status; // Ensure 'status' is properly defined and accessible
+}
+
 }

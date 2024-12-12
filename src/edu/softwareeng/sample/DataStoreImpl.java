@@ -18,4 +18,10 @@ public class DataStoreImpl implements DataStore {
         outputConfig.appendResults(outputResults, delimiter);  // Append result to OutputConfig
         return WriteResult.SUCCESS;
     }
+    @Override
+public Iterable<Integer> read(InputConfig inputConfig) {
+    // Assuming InputConfig has a method getInputs() that returns a list of integers
+    return inputConfig.getInputs();
+}
+
 }

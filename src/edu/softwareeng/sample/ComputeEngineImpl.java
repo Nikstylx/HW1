@@ -22,6 +22,16 @@ public class ComputeEngineImpl implements ComputeEngine {
         return "Computation complete";
     }
 
+    @Override
+    public String compute(int input) {
+        // Implement the method that computes based on an integer input
+        if (isPrime(input)) {
+            return input + " is prime";
+        } else {
+            return input + " is not prime";
+        }
+    }
+
     private boolean isPrime(int num) {
         if (num <= 1) {
             return false;  // 0 and 1 are not prime numbers

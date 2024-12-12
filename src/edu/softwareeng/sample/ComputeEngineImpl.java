@@ -1,10 +1,7 @@
 package edu.softwareeng.sample;
 
-import edu.softwareeng.sample.ComputeEngine;  // Import ComputeEngine interface
-import edu.softwareeng.sample.InputConfig;    // Import InputConfig interface
-import edu.softwareeng.sample.OutputConfig;   // Import OutputConfig interface
-import java.util.ArrayList;                   // Import ArrayList
-import java.util.List;                        // Import List
+import java.util.ArrayList;
+import java.util.List;
 
 public class ComputeEngineImpl implements ComputeEngine {
 
@@ -23,9 +20,9 @@ public class ComputeEngineImpl implements ComputeEngine {
 
     @Override
     public String compute(InputConfig inputConfig, OutputConfig outputConfig, char delimiter) {
-        List<Integer> inputs = inputConfig.getInputs();
+        List<Integer> inputs = inputConfig.getInputs(); // Ensure getInputs() is correctly defined in InputConfig
         List<String> results = new ArrayList<>();
-        
+
         for (Integer num : inputs) {
             if (num < 0) {
                 throw new IllegalArgumentException("Input number cannot be negative");
@@ -38,21 +35,20 @@ public class ComputeEngineImpl implements ComputeEngine {
             }
         }
 
-        outputConfig.appendResults(results, delimiter);
-
+        outputConfig.appendResults(results, delimiter); // Ensure appendResults() is defined in OutputConfig
         return "Computation complete.";
     }
 
     private boolean isPrime(int num) {
         if (num <= 1) {
-            return false;
+            return false; // Numbers less than 2 are not prime
         }
         for (int i = 2; i <= Math.sqrt(num); i++) {
             if (num % i == 0) {
-                return false;
+                return false; // Found a divisor, it's not prime
             }
         }
-        return true;
+        return true; // No divisors found, it's prime
     }
 }
 

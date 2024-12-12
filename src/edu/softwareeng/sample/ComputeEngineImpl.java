@@ -1,3 +1,11 @@
+package edu.softwareeng.sample;
+
+import edu.softwareeng.sample.ComputeEngine; // For ComputeEngine interface
+import edu.softwareeng.sample.InputConfig; // For InputConfig interface
+import edu.softwareeng.sample.OutputConfig; // For OutputConfig interface
+import java.util.ArrayList; // For ArrayList
+import java.util.List; // For List
+
 public class ComputeEngineImpl implements ComputeEngine {
 
     @Override

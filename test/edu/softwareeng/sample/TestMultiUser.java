@@ -60,7 +60,6 @@ public class TestMultiUser {
         Collections.sort(singleThreadedOutput);
         Collections.sort(multiThreadedOutput);
 
-        // Check that the output is the same for multi-threaded and single-threaded
         
     }
 }

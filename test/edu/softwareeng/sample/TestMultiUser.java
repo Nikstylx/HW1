@@ -19,7 +19,6 @@ public class TestMultiUser {
     
     @BeforeEach
     public void initializeComputeEngine() {
-        // Create an instance of the coordinator component
         DataStore dataStore = new DataStoreImpl();
         ComputeEngine computeEngine = new ComputeEngineImpl();
         
@@ -34,17 +33,15 @@ public class TestMultiUser {
             testUsers.add(new TestUser(coordinator));
         }
         
-        // Run single-threaded
-        String multiThreadFilePrefix = "testMultiUser.compareMultiAndSingleThreaded.test.multiThreadOut.tmp";
+        // Run single threaded
+        String singleThreadFilePrefix = "testMultiUser.compareMultiAndSingleThreaded.test.singleThreadOut.tmp";
         for (int i = 0; i < numThreads; i++) {
-        File multiThreadedOut = new File(multiThreadFilePrefix + i);
-        multiThreadedOut.deleteOnExit();
-        String multiThreadOutputPath = multiThreadedOut.getCanonicalPath();
-        TestUser testUser = testUsers.get(i);
-        results.add(threadPool.submit(() -> testUser.run(multiThreadOutputPath)));
-}
+            File singleThreadedOut = new File(singleThreadFilePrefix + i);
+            singleThreadedOut.deleteOnExit();
+            testUsers.get(i).run(singleThreadedOut.getCanonicalPath());
+        }
         
-        // Run multi-threaded
+        // Run multi threaded
         ExecutorService threadPool = Executors.newCachedThreadPool();
         List<Future<?>> results = new ArrayList<>();
         String multiThreadFilePrefix = "testMultiUser.compareMultiAndSingleThreaded.test.multiThreadOut.tmp";
@@ -56,11 +53,11 @@ public class TestMultiUser {
             results.add(threadPool.submit(() -> testUser.run(multiThreadOutputPath)));
         }
         
+        // Wait for all threads to finish
         results.forEach(future -> {
             try {
                 future.get();
             } catch (Exception e) {
-                e.printStackTrace(); // Print the stack trace for better debugging
                 throw new RuntimeException(e);
             }
         });
@@ -75,11 +72,7 @@ public class TestMultiUser {
         List<String> result = new ArrayList<>();
         for (int i = 0; i < numThreads; i++) {
             File multiThreadedOut = new File(prefix + i);
-            if (!multiThreadedOut.exists()) {
-                System.err.println("Output file " + multiThreadedOut.getCanonicalPath() + " does not exist.");
-            } else {
-                result.addAll(Files.readAllLines(multiThreadedOut.toPath()));
-            }
+            result.addAll(Files.readAllLines(multiThreadedOut.toPath()));
         }
         return result;
     }

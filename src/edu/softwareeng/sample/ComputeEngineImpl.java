@@ -18,7 +18,11 @@ public class ComputeEngineImpl implements ComputeEngine {
 
             // Find prime numbers in the range [start, end]
             List<Integer> primes = findPrimesInRange(start, end);
-            return primes.toString(); // Return primes as a string
+            List<String> result = new ArrayList<>();
+            for (Integer prime : primes) {
+                result.add(prime.toString()); // Convert each prime to a string
+            }
+            return result; // Return a list of strings
         } catch (IllegalArgumentException e) {
             // Handle the case where the value is negative
             System.err.println("Input validation error: " + e.getMessage());

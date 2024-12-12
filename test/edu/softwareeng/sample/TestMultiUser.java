@@ -29,7 +29,8 @@ public class TestMultiUser {
 public void compareMultiAndSingleThreaded() throws Exception {
     int numThreads = 4; // Number of threads or tasks to run
     List<TestUser> testUsers = new ArrayList<>();
-
+    
+    String filePath = getClass().getResource("/testInputFile.test").getPath();
     // Initialize test users (one for each task)
     for (int i = 0; i < numThreads; i++) {
         testUsers.add(new TestUser(coordinator));

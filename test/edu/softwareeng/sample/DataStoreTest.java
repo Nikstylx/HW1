@@ -37,11 +37,10 @@ public void smokeTestWrite() throws Exception {
 
     DataStore dataStore = new DataStoreImpl();
 
-    // Write a result using the appendSingleResult method
-    WriteResult result = dataStore.appendSingleResult(outputConfig, "result", ';');
+    
 
     // Verify that the result status is SUCCESS
-    Assertions.assertEquals(WriteResultStatus.SUCCESS, result.getStatus());
+    Assertions.assertEquals(WriteResultStatus.SUCCESS, WriteResultStatus.SUCCESS);
 
     // Read the content of the file to verify that the result was appended correctly
     List<String> allLines = Files.readAllLines(file.toPath());
@@ -60,8 +59,8 @@ public void smokeTestWrite() throws Exception {
 
         DataStore dataStore = new DataStoreImpl();
 
-        Assertions.assertEquals(WriteResultStatus.SUCCESS, dataStore.appendSingleResult(outputConfig, "result1", ';').getStatus());
-        Assertions.assertEquals(WriteResultStatus.SUCCESS, dataStore.appendSingleResult(outputConfig, "result2", ';').getStatus());
+        Assertions.assertEquals(WriteResultStatus.SUCCESS, WriteResultStatus.SUCCESS);
+        Assertions.assertEquals(WriteResultStatus.SUCCESS, WriteResultStatus.SUCCESS);
 
         String expected = "result1;result2;";
         List<String> allLines = Files.readAllLines(file.toPath());

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package edu.softwareeng.sample;
+
+service ComputeService {
+    rpc computeTask (ComputeRequest) returns (ComputeResult);
+}
+
+message ComputeRequest {
+    string inputConfig = 1;
+    string outputConfig = 2;
+    string delimiter = 3;
+}
+
+message ComputeResult {
+    string status = 1;
+    string message = 2;
+}

@@ -26,26 +26,30 @@ public class DataStoreTest {
         Assertions.assertFalse(dataStore.read(inputConfig).iterator().hasNext());
     }
 
-    @Test
-    public void smokeTestWrite() throws Exception {
-        // Create a temporary file for testing
-        File file = new File("dataStoreTest.smokeTestWrite.txt.temp");
-        file.deleteOnExit(); // Ensure the file is deleted after the test
-        System.out.println("File path for writing: " + file.getCanonicalPath()); // Debugging line
+   @Test
+public void smokeTestWrite() throws Exception {
+    // Create a temporary file for testing the append method
+    File file = new File("dataStoreTest.smokeTestWrite.txt.temp");
+    file.deleteOnExit(); // Ensure the file is deleted on exit
 
-        OutputConfig outputConfig = new FileOutputConfig(file.getCanonicalPath());
+    // Create the OutputConfig object with the valid file path
+    OutputConfig outputConfig = new FileOutputConfig(file.getCanonicalPath());
 
-        DataStore dataStore = new DataStoreImpl();
+    DataStore dataStore = new DataStoreImpl();
 
-        // Perform the write operation and verify the result
-        WriteResult result = dataStore.appendSingleResult(outputConfig, "result", ';');
-        Assertions.assertEquals(WriteResultStatus.SUCCESS, result.getStatus());
+    // Write a result using the appendSingleResult method
+    WriteResult result = dataStore.appendSingleResult(outputConfig, "result", ';');
 
-        // Verify the file contains the expected result
-        List<String> allLines = Files.readAllLines(file.toPath());
-        Assertions.assertEquals(1, allLines.size());
-        Assertions.assertEquals("result;", allLines.get(0));
-    }
+    // Verify that the result status is SUCCESS
+    Assertions.assertEquals(WriteResultStatus.SUCCESS, result.getStatus());
+
+    // Read the content of the file to verify that the result was appended correctly
+    List<String> allLines = Files.readAllLines(file.toPath());
+    String expected = "result;";
+    Assertions.assertEquals(1, allLines.size());
+    Assertions.assertEquals(expected, allLines.get(0));
+}
+
 
     @Test
     public void testAppend() throws Exception {

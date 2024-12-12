@@ -4,7 +4,6 @@ import java.io.File;
 
 public class TestUser {
     
-    // Use the correct type for your User <-> ComputeEngine API
     private final ComputationCoordinator coordinator;
 
     public TestUser(ComputationCoordinator coordinator) {
@@ -13,22 +12,33 @@ public class TestUser {
 
     public void run(String outputPath) {
         char delimiter = ';';
-        String inputPath = "test" + File.separatorChar + "testInputFile.test"; // Make sure the file exists or change the path accordingly
+        String inputPath = "test" + File.separatorChar + "testInputFile.test"; // Ensure this file exists
         
-        // Create the input and output configurations
-        InputConfig inputConfig = new FileInputConfig(inputPath);  // Input configuration
-        OutputConfig outputConfig = new FileOutputConfig(outputPath);  // Output configuration
+        // Log file paths
+        System.out.println("Input Path: " + inputPath);
+        System.out.println("Output Path: " + outputPath);
+        
+        // Check if the input file exists and is readable
+        File inputFile = new File(inputPath);
+        if (!inputFile.exists() || !inputFile.canRead()) {
+            throw new IllegalArgumentException("Input file does not exist or cannot be read: " + inputPath);
+        }
 
-        // Create the compute request with the necessary configurations
+        InputConfig inputConfig = new FileInputConfig(inputPath);
+        OutputConfig outputConfig = new FileOutputConfig(outputPath);
+
+        // Create the compute request
         ComputeRequest request = new ComputeRequest(inputConfig, outputConfig, delimiter);
 
-        // Call the compute method of the coordinator
-        ComputeResult result = coordinator.compute(request);
-
-        // Handle result if needed (e.g., checking the status or logging)
-        if (result.getStatus() != ComputeResult.ComputeResultStatus.SUCCESS) {
-            // Log or handle errors if the computation wasn't successful
-            System.err.println("Computation failed: " + result.getStatus());
+        // Call the compute method
+        try {
+            ComputeResult result = coordinator.compute(request);
+            if (result.getStatus() != ComputeResult.ComputeResultStatus.SUCCESS) {
+                System.err.println("Computation failed: " + result.getStatus());
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error during computation: " + e.getMessage());
+            throw e; // Rethrow to propagate the failure
         }
     }
 }

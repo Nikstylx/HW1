@@ -1,6 +1,14 @@
 package edu.softwareeng.sample;
 
 public class ComputationCoordinatorPrototype {
+	
+	InputConfig inputConfig = new InputConfig() {
+    @Override
+    public List<Integer> getInputs() {
+        return Arrays.asList(1, 2, 3, 4);  // Example: return a list of integers
+    }
+
+
 
 	public void prototype(ComputationCoordinator apiToCall) {
 		// For now, use an anonymous inner class - other approaches might be to set this to null, use

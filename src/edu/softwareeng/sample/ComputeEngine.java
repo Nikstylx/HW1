@@ -18,5 +18,6 @@ package edu.softwareeng.sample;
  * from the system specification that it will always be an int, it's fine to just use that as well.
  */
 public interface ComputeEngine {
-	String compute(int value);
+    String compute(int num);
+    String compute(InputConfig inputConfig, OutputConfig outputConfig, char delimiter);
 }

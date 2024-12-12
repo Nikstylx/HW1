@@ -1,15 +1,14 @@
 package edu.softwareeng.sample;
 
-import java.io.File;
+import java.util.List;
 
 public class DataStoreImpl implements DataStore {
-    
+
     @Override
-    public void processInput(InputConfig input) {
-        // Make sure visitInputConfig is defined in the InputConfig interface/class
-        input.visitInputConfig(fileConfig -> {
-            // Handle fileConfig here
-            // Example: you can perform operations with the fileConfig
-        });
+    public WriteResult appendSingleResult(OutputConfig outputConfig, String result, char delimiter) {
+        List<String> outputResults = new ArrayList<>();
+        outputResults.add(result);  // Add result to list
+        outputConfig.appendResults(outputResults, delimiter);  // Append result to OutputConfig
+        return WriteResult.SUCCESS;
     }
 }
